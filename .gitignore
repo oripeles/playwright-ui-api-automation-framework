@@ -1,0 +1,30 @@
+# IDE
+.idea/
+.vscode/
+
+# macOS
+.DS_Store
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Pytest / tooling
+.pytest_cache/
+.tox/
+.coverage
+coverage.xml
+htmlcov/
+
+# Allure
+allure-results/
+allure-report/
+
+# Playwright artifacts
+playwright-report/
+test-results/
+trace.zip
+traces/
+
