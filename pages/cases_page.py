@@ -4,5 +4,7 @@ class CasesPage(BasePage):
     def __init__(self, page):
         super().__init__(page)
 
-        self.cases_title = page.get_by_text("Test Cases")
+        self.cases_title = page.locator("h2.title", has_text="Test Cases")
+
+
 

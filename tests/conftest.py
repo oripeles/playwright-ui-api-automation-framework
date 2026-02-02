@@ -1,8 +1,12 @@
 import pytest
+from utilities.config import BASE_URL
+from utilities.json_loader import load_json
 from playwright.sync_api import sync_playwright, Browser, BrowserContext, Page
 from utilities.config import HEADLESS
 from pages.home_page import HomePage
+from playwright.sync_api import expect
 
+pytest_plugins = ("utilities.allure_hooks",)
 
 @pytest.fixture(scope="session")
 def browser():
@@ -33,5 +37,17 @@ def page(context):
 def home(page):
     page.goto("/")
     home = HomePage(page)
-    assert home.is_home_page_visible(), "Home page not active or visible"
+    expect(home.active_tab).to_be_visible()
     return home
+
+@pytest.fixture(scope="session")
+def base_url():
+    return BASE_URL
+
+@pytest.fixture(scope="session")
+def user_data():
+    return load_json("user_data")
+
+@pytest.fixture
+def existing_user(user_data):
+    return user_data["existing_user"]

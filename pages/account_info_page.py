@@ -1,3 +1,4 @@
+from pages.account_created_page import AccountCreatedPage
 from pages.base_page import BasePage
 
 class AccountInfoPage(BasePage):
@@ -23,7 +24,45 @@ class AccountInfoPage(BasePage):
         self.city_input = page.locator("#city")
         self.zipcode_input = page.locator("#zipcode")
         self.mobile_input = page.locator("#mobile_number")
-        self.create_account_button = page.locator("button[data-qa='create-account']")
+        self.create_account_button = page.locator("[data-qa='create-account']")
+
+    def select_title(self, title):
+            if title == "Mr":
+                self.title_mr.check()
+            elif title == "Mrs":
+                self.title_mrs.check()
+            else:
+                raise ValueError("Title must be 'Mr' or 'Mrs'")
+
+    def fill_password(self, password):
+        self.password_input.fill(password)
+
+    def select_date(self, day, month, year):
+        self.days_select.select_option(str(day))
+        self.years_select.select_option(str(year))
+        self.months_select.select_option(label=month)
+
+    def select_newsletter(self):
+        self.newsletter_checkbox.check()
+
+    def select_optin(self):
+        self.optin_checkbox.check()
+
+    def fill_details(self, first, last, company, addr1, addr2, country, state, city, zipcode, mobile):
+        self.first_name_input.fill(first)
+        self.last_name_input.fill(last)
+        self.company_input.fill(company)
+        self.address1_input.fill(addr1)
+        self.address2_input.fill(addr2)
+        self.country_select.select_option(label=country)
+        self.state_input.fill(state)
+        self.city_input.fill(city)
+        self.zipcode_input.fill(zipcode)
+        self.mobile_input.fill(mobile)
+
+    def click_create_account(self):
+        self.create_account_button.click()
+        return AccountCreatedPage(self.page)
 
 
 
