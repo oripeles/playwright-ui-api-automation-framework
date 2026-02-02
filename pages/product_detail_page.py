@@ -8,6 +8,7 @@ class ProductsDetailPage(BasePage):
         self.add_to_cart = page.get_by_role("button", name="Add to cart")
         self.continue_shopping = page.get_by_role("button", name="Continue Shopping")
 
+
     def set_quantity(self, amount):
         self.quantity_input.fill(str(amount))
 

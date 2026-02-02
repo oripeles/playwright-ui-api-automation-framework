@@ -30,8 +30,9 @@ class HomePage(BasePage):
         self.view_product = page.get_by_role("link", name="View Product")
         self.left_sidebar = page.locator(".left-sidebar")
         self.subscription_input = page.locator("#susbscribe_email")
-        self.men_category = page.get_by_role("link", name="Men")
+        self.men_category = page.locator("a[href='#Men']")
         self.category_title_women = page.get_by_role("heading",name="Women - Dress Products")
+        self.men_shirts_title = page.get_by_role("heading", name="Men - Tshirts Products")
         self.shirts_category = page.get_by_role("link", name="Tshirts")
 
     def click_login_tab(self):
@@ -58,8 +59,8 @@ class HomePage(BasePage):
         self.products_tab.click()
         return ProductsPage(self.page)
 
-    def click_view_product(self):
-        self.view_product.click()
+    def click_view_product(self, index):
+        self.view_product.nth(index).click()
         return ProductsDetailPage(self.page)
 
     def go_to_cart(self):

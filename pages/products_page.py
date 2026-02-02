@@ -7,6 +7,7 @@ class ProductsPage(BasePage):
         super().__init__(page)
 
         self.cases_title = page.get_by_role("heading", name="All Products")
+        self.searched_products_title = page.get_by_role("heading", name="Searched Products")
         self.view_product = page.locator("[href^='/product_details/']")
         self.view_product_first_button = page.locator("[href='/product_details/1']")
         self.search_product = page.locator("#search_product")
