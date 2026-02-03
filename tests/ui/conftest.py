@@ -1,18 +1,17 @@
 import pytest
-from playwright.sync_api import sync_playwright, expect
+from playwright.sync_api import expect
 from utilities.config import HEADLESS
 from pages.home_page import HomePage
 
 
 @pytest.fixture(scope="session")
-def browser():
-    with sync_playwright() as p:
-        browser = p.chromium.launch(
-            headless=HEADLESS,
-            args=["--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage"],
-        )
-        yield browser
-        browser.close()
+def browser(playwright):
+    browser = playwright.chromium.launch(
+        headless=HEADLESS,
+        args=["--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage"],
+    )
+    yield browser
+    browser.close()
 
 
 @pytest.fixture

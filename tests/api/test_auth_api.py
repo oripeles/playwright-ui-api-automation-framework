@@ -1,5 +1,3 @@
-import os
-
 from tests.api.helpers.assertions import assert_missing_required_parameter, assert_method_not_supported
 
 
