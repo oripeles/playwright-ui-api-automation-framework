@@ -22,4 +22,4 @@ def existing_user(user_data):
 def user_password():
     password = os.getenv("USER_PASSWORD")
     assert password, "Missing USER_PASSWORD env var"
-    return password
+    return password.strip()

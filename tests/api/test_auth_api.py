@@ -4,6 +4,8 @@ from tests.api.helpers.assertions import assert_missing_required_parameter, asse
 def test_verify_login_valid_details(auth_client, existing_user,user_password):
     password = user_password
     res = auth_client.verify_login(existing_user["email"], password)
+    print("EMAIL:", existing_user["email"])
+    print("PW_LEN:", len(user_password))
     data = res.json()
     print(data)
     assert data["responseCode"] == 200
