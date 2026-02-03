@@ -8,9 +8,9 @@ from utilities.email_generator import generate_unique_email
 class TestRegisterUser:
 
     @allure.title("Register new user successfully and delete account")
-    def test_register_user(self, home, existing_user):
+    def test_register_user(self, home, existing_user,user_password):
         email = generate_unique_email()
-        password = os.getenv("USER_PASSWORD")
+        password = user_password
         name = existing_user["name"]
         gender = "Mr"
         date_data = {

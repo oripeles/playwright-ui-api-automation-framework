@@ -6,8 +6,8 @@ from playwright.sync_api import expect
 class TestLogoutUser:
 
     @allure.title("Logout successfully and return to login page")
-    def test_logout_user(self, home, existing_user):
-        password = os.getenv("USER_PASSWORD")
+    def test_logout_user(self, home, existing_user,user_password):
+        password = user_password
         email = existing_user["email"]
         login_page = home.click_login_tab()
         expect(login_page.login_title).to_be_visible()

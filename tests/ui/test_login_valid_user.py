@@ -8,8 +8,8 @@ class TestLoginValidUser:
 
     @pytest.mark.smoke
     @allure.title("Login successfully with valid credentials")
-    def test_login_valid_user(self, home, existing_user):
-        password = os.getenv("USER_PASSWORD")
+    def test_login_valid_user(self, home, existing_user,user_password):
+        password = user_password
         email = existing_user["email"]
         login = home.click_login_tab()
         expect(login.login_title).to_be_visible()

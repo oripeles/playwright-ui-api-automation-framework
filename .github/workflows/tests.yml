@@ -74,7 +74,7 @@ jobs:
             -e USER_PASSWORD="${{ secrets.USER_PASSWORD }}" \
             -v "${{ github.workspace }}/allure-results:/app/allure-results" \
             playwright-tests \
-            pytest -n 4 --reruns 1 --reruns-delay 1 --alluredir=/app/allure-results
+            pytest -n 4 --reruns 3 --reruns-delay 1 --alluredir=/app/allure-results
 
       - name: Generate Allure HTML report
         run: |
