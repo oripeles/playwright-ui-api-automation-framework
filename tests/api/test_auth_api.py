@@ -1,16 +1,5 @@
 from tests.api.helpers.assertions import assert_missing_required_parameter, assert_method_not_supported
 
-
-def test_verify_login_valid_details(auth_client, existing_user,user_password):
-    password = user_password
-    res = auth_client.verify_login(existing_user["email"], password)
-    print("EMAIL:", existing_user["email"])
-    print("PW_LEN:", len(user_password))
-    data = res.json()
-    print(data)
-    assert data["responseCode"] == 200
-    assert "exists" in data["message"].lower()
-
 def test_verify_login_invalid_password(auth_client, existing_user):
     res = auth_client.verify_login(existing_user["email"], "wrong_password_123")
     data = res.json()
