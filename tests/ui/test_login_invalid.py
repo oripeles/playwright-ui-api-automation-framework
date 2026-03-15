@@ -12,12 +12,14 @@ from playwright.sync_api import expect
     load_json("invalid_logins")
 )
 def test_login_invalid_user(home, case):
-        login = home.click_login_tab()
-        expect(login.login_title).to_be_visible()
-        login.enter_email_and_password(
-            case["email"],
-            case["password"]
-        )
-        login.click_login_button()
-        expect(login.login_error).to_be_visible()
-        expect(login.login_error).to_have_text("Your email or password is incorrect!")
+        with allure.step("Navigate to login page"):
+            login = home.click_login_tab()
+            expect(login.login_title).to_be_visible()
+
+        with allure.step(f"Login with email: {case['email']}"):
+            login.enter_email_and_password(case["email"], case["password"])
+            login.click_login_button()
+
+        with allure.step("Verify error message"):
+            expect(login.login_error).to_be_visible()
+            expect(login.login_error).to_have_text("Your email or password is incorrect!")
