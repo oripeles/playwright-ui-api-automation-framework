@@ -1,5 +1,8 @@
+import pytest
 from tests.api.helpers.assertions import assert_method_not_supported
 from tests.api.helpers.assertions import assert_missing_required_parameter
+
+pytestmark = pytest.mark.regression
 
 def test_get_all_products_contract(products_client):
     res = products_client.get_all_products()

@@ -1,7 +1,10 @@
+import pytest
 from utilities.email_generator import generate_unique_email
 
+pytestmark = pytest.mark.regression
+
 def test_create_account_success(auth_client):
-    email =  generate_unique_email,
+    email = generate_unique_email()
     password = "Password123!"
 
     create_payload = {

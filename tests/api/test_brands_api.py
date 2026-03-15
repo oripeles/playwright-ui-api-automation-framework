@@ -1,4 +1,7 @@
+import pytest
 from tests.api.helpers.assertions import assert_method_not_supported
+
+pytestmark = pytest.mark.regression
 
 
 def test_get_all_brands_contract(brands_client):

@@ -1,6 +1,9 @@
+import pytest
 import os
 import allure
 from playwright.sync_api import expect
+
+pytestmark = pytest.mark.regression
 
 @allure.feature("Login")
 class TestLogoutUser:

@@ -1,5 +1,8 @@
+import pytest
 import allure
 from playwright.sync_api import expect
+
+pytestmark = pytest.mark.regression
 
 @allure.feature("Checkout")
 class TestRegisterCheckout:

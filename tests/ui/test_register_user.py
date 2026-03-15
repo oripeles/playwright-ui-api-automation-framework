@@ -1,7 +1,10 @@
+import pytest
 import os
 import allure
 from playwright.sync_api import expect
 from utilities.email_generator import generate_unique_email
+
+pytestmark = pytest.mark.regression
 
 @allure.feature("Registration")
 

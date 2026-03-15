@@ -1,5 +1,7 @@
 import pytest
 import allure
+
+pytestmark = pytest.mark.regression
 from utilities.json_loader import load_json
 from playwright.sync_api import expect
 

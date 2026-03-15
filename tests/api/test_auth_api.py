@@ -1,4 +1,7 @@
+import pytest
 from tests.api.helpers.assertions import assert_missing_required_parameter, assert_method_not_supported
+
+pytestmark = pytest.mark.regression
 
 def test_verify_login_invalid_password(auth_client, existing_user):
     res = auth_client.verify_login(existing_user["email"], "wrong_password_123")
