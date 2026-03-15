@@ -10,7 +10,12 @@ class TestSubscription:
     @allure.title("Subscribe successfully from home page")
     def test_subscription_from_home_page(self, home, existing_user):
         email = existing_user["email"]
-        home.scroll_down()
-        expect(home.subscription_title).to_be_visible()
-        home.subscribe(email)
-        expect(home.subscription_success).to_be_visible()
+        with allure.step("Scroll to subscription section"):
+            home.scroll_down()
+            expect(home.subscription_title).to_be_visible()
+
+        with allure.step("Subscribe with email"):
+            home.subscribe(email)
+
+        with allure.step("Verify success message"):
+            expect(home.subscription_success).to_be_visible()

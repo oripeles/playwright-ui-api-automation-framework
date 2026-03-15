@@ -1,4 +1,5 @@
 import pytest
+import allure
 from utilities.email_generator import generate_unique_email
 
 pytestmark = pytest.mark.regression
@@ -27,13 +28,14 @@ def test_create_account_success(auth_client):
         "mobile_number": "0501234567",
     }
 
-    create_res = auth_client.create_account(create_payload)
-    create_data = create_res.json()
-    assert create_data["responseCode"] == 201
+    with allure.step("Create account via API"):
+        create_res = auth_client.create_account(create_payload)
+        create_data = create_res.json()
+        assert create_data["responseCode"] == 201
 
-    delete_res = auth_client.delete_account(email, password)
-    delete_data = delete_res.json()
-
-    assert delete_data["responseCode"] == 200
-    assert "deleted" in delete_data["message"].lower()
+    with allure.step("Delete account via API"):
+        delete_res = auth_client.delete_account(email, password)
+        delete_data = delete_res.json()
+        assert delete_data["responseCode"] == 200
+        assert "deleted" in delete_data["message"].lower()
 

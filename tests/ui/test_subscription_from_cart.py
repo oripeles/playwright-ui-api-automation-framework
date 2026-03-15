@@ -10,7 +10,12 @@ class TestSubscriptionFromCart:
     @allure.title("Subscribe successfully from cart page")
     def test_subscription_card(self, home, existing_user):
         email = existing_user["email"]
-        cart = home.go_to_cart()
-        cart.scroll_down_to_footer()
-        expect(cart.subscription_title).to_be_visible()
-        cart.subscribe(email)
+        with allure.step("Navigate to cart"):
+            cart = home.go_to_cart()
+
+        with allure.step("Scroll to subscription section"):
+            cart.scroll_down_to_footer()
+            expect(cart.subscription_title).to_be_visible()
+
+        with allure.step("Subscribe with email"):
+            cart.subscribe(email)

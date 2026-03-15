@@ -34,26 +34,33 @@ class TestRegisterUser:
             "mobile": "0501234567"
         }
 
-        login = home.click_login_tab()
-        expect(login.new_user_signup_title).to_be_visible()
-        login.enter_name_and_email(name, email)
-        info = login.click_signup_button()
-        expect(info.enter_account_info_title).to_be_visible()
-        info.select_title(gender)
-        info.fill_password(password)
-        info.select_date(**date_data)
-        info.select_newsletter()
-        info.select_optin()
-        info.fill_details(**address_data)
-        created = info.click_create_account()
-        expect(created.account_created_title).to_be_visible()
-        created.click_continue()
-        expect(home.logged_in_user).to_be_visible()
-        expect(home.logged_in_user).to_have_text(f"Logged in as {name}")
-        delete_account =  home.click_delete_account()
-        delete_account.click_continue()
-        expect(home.login_tab).to_be_visible()
-        expect(home.login_tab).to_have_text("Signup / Login")
+        with allure.step("Navigate to signup page"):
+            login = home.click_login_tab()
+            expect(login.new_user_signup_title).to_be_visible()
+            login.enter_name_and_email(name, email)
+            info = login.click_signup_button()
+
+        with allure.step("Fill account information"):
+            expect(info.enter_account_info_title).to_be_visible()
+            info.select_title(gender)
+            info.fill_password(password)
+            info.select_date(**date_data)
+            info.select_newsletter()
+            info.select_optin()
+            info.fill_details(**address_data)
+
+        with allure.step("Verify account created"):
+            created = info.click_create_account()
+            expect(created.account_created_title).to_be_visible()
+            created.click_continue()
+            expect(home.logged_in_user).to_be_visible()
+            expect(home.logged_in_user).to_have_text(f"Logged in as {name}")
+
+        with allure.step("Delete account"):
+            delete_account = home.click_delete_account()
+            delete_account.click_continue()
+            expect(home.login_tab).to_be_visible()
+            expect(home.login_tab).to_have_text("Signup / Login")
 
 
 

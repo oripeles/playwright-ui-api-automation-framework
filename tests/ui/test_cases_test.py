@@ -9,6 +9,9 @@ class TestCasesTest:
 
     @allure.title("Verify test cases page is accessible and title is visible")
     def test_cases_test(self, home):
-        cases = home.click_test_cases_tab()
-        expect(cases.cases_title).to_be_visible()
-        expect(cases.cases_title).to_have_text("Test Cases")
+        with allure.step("Navigate to Test Cases page"):
+            cases = home.click_test_cases_tab()
+
+        with allure.step("Verify page title"):
+            expect(cases.cases_title).to_be_visible()
+            expect(cases.cases_title).to_have_text("Test Cases")

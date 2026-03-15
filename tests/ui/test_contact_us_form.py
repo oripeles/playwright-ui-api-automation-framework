@@ -15,9 +15,14 @@ class TestContactUsForm:
             "subject": "QA Automation",
             "message": "123 Test"
         }
-        contact = home.click_contact_us_tab()
-        expect(contact.get_in_touch_title).to_be_visible()
-        contact.fill_details(**details_data)
-        contact.click_submit()
-        contact.click_home()
+        with allure.step("Navigate to Contact Us page"):
+            contact = home.click_contact_us_tab()
+            expect(contact.get_in_touch_title).to_be_visible()
+
+        with allure.step("Fill and submit form"):
+            contact.fill_details(**details_data)
+            contact.click_submit()
+
+        with allure.step("Verify redirect to home"):
+            contact.click_home()
 
