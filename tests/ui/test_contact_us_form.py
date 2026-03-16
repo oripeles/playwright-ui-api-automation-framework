@@ -10,7 +10,7 @@ class TestContactUsForm:
     @allure.title("Submit contact us form successfully with valid details")
     def test_contact_us_form(self, home, existing_user):
         details_data = {
-            "name": "Ori peles",
+            "name": "Test User",
             "email": existing_user["email"],
             "subject": "QA Automation",
             "message": "123 Test"

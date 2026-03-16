@@ -34,7 +34,7 @@ class HomePage(BasePage):
         self.left_sidebar = page.locator(".left-sidebar")
         self.subscription_input = page.locator("#susbscribe_email")
         self.men_category = page.locator("a[href='#Men']")
-        self.category_title_women = page.get_by_role("heading",name="Women - Dress Products")
+        self.category_title_women = page.get_by_role("heading", name="Women - Dress Products")
         self.men_shirts_title = page.get_by_role("heading", name="Men - Tshirts Products")
         self.shirts_category = page.get_by_role("link", name="Tshirts")
 

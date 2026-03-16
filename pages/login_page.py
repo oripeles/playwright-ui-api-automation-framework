@@ -9,7 +9,7 @@ class LoginPage(BasePage):
     def __init__(self, page: Page) -> None:
         super().__init__(page)
 
-        self.new_user_signup_title = page.get_by_role("heading",name="New User Signup!")
+        self.new_user_signup_title = page.get_by_role("heading", name="New User Signup!")
         self.login_title = page.get_by_role("heading", name="Login to your account")
         self.name_input = page.locator("[data-qa='signup-name']")
         self.email_input = page.locator("[data-qa='signup-email']")

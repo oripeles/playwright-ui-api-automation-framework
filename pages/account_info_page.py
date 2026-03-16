@@ -31,12 +31,12 @@ class AccountInfoPage(BasePage):
         self.create_account_button = page.locator("[data-qa='create-account']")
 
     def select_title(self, title: str) -> None:
-            if title == "Mr":
-                self.title_mr.check()
-            elif title == "Mrs":
-                self.title_mrs.check()
-            else:
-                raise ValueError("Title must be 'Mr' or 'Mrs'")
+        if title == "Mr":
+            self.title_mr.check()
+        elif title == "Mrs":
+            self.title_mrs.check()
+        else:
+            raise ValueError("Title must be 'Mr' or 'Mrs'")
 
     def fill_password(self, password: str) -> None:
         self.password_input.fill(password)
