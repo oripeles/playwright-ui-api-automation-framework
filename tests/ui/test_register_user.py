@@ -63,7 +63,3 @@ class TestRegisterUser:
             expect(home.login_tab).to_have_text("Signup / Login")
 
 
-
-
-
-

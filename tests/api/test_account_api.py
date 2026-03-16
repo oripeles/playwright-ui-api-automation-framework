@@ -16,7 +16,7 @@ def test_create_account_success(auth_client, user_password):
         "password": password,
         "title": reg["gender"],
         "birth_date": reg["birth_date"],
-        "birth_month": "1",
+        "birth_month": reg["birth_month_num"],
         "birth_year": reg["birth_year"],
         "firstname": reg["first"],
         "lastname": reg["last"],

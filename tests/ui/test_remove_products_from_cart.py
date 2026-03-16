@@ -10,8 +10,9 @@ class TestRemoveProductsFromCart:
 
     @allure.title("Remove product from cart successfully")
     def test_remove_products_from_cart(self, home):
-        product_name = load_json("products_data")["products"]["first"]["name"]
-        product_id = 1
+        products = load_json("products_data")["products"]
+        product_name = products["first"]["name"]
+        product_id = products["first"]["id"]
         with allure.step("Add product to cart"):
             product = home.click_product_tab()
             product.add_to_cart_by_name(product_name)

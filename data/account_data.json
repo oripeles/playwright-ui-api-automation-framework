@@ -4,6 +4,7 @@
     "gender": "Mr",
     "birth_date": "10",
     "birth_month": "January",
+    "birth_month_num": "1",
     "birth_year": "2000",
     "first": "Test",
     "last": "User",
