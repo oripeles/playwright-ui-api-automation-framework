@@ -112,6 +112,8 @@ This prevents loading UI fixtures when running API-only tests, and keeps CI stab
 data/
 ├── invalid_logins.json
 ├── user_data.json
+├── account_data.json
+└── products_data.json
 
 ## 🏷️ Pytest Markers
 
