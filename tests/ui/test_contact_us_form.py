@@ -1,6 +1,7 @@
 import pytest
 import allure
 from playwright.sync_api import expect
+from utilities.json_loader import load_json
 
 pytestmark = pytest.mark.regression
 
@@ -9,11 +10,12 @@ class TestContactUsForm:
 
     @allure.title("Submit contact us form successfully with valid details")
     def test_contact_us_form(self, home, existing_user):
+        contact_data = load_json("account_data")["contact_us"]
         details_data = {
-            "name": "Test User",
+            "name": contact_data["name"],
             "email": existing_user["email"],
-            "subject": "QA Automation",
-            "message": "123 Test"
+            "subject": contact_data["subject"],
+            "message": contact_data["message"]
         }
         with allure.step("Navigate to Contact Us page"):
             contact = home.click_contact_us_tab()

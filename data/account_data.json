@@ -16,5 +16,10 @@
     "city": "Petah Tikva",
     "zipcode": "4950000",
     "mobile": "0501234567"
+  },
+  "contact_us": {
+    "name": "Test User",
+    "subject": "QA Automation",
+    "message": "123 Test"
   }
 }
