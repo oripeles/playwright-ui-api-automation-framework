@@ -1,8 +1,10 @@
 import allure
 import pytest
+from typing import Generator
+
 
 @pytest.hookimpl(hookwrapper=True)
-def pytest_runtest_makereport(item, call):
+def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo[None]) -> Generator[None, None, None]:
     outcome = yield
     report = outcome.get_result()
 
