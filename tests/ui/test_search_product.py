@@ -1,6 +1,7 @@
 import pytest
 import allure
 from playwright.sync_api import expect
+from utilities.json_loader import load_json
 
 pytestmark = pytest.mark.regression
 
@@ -9,7 +10,7 @@ class TestSearchProduct:
 
     @allure.title("Search for product and verify relevant results are displayed")
     def test_search_product(self, home):
-        product_search = "Men Tshirt"
+        product_search = load_json("products_data")["products"]["second"]["name"]
         with allure.step("Navigate to products page"):
             product = home.click_product_tab()
             expect(product.cases_title).to_be_visible()

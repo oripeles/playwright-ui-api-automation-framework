@@ -3,6 +3,7 @@ import os
 import allure
 from playwright.sync_api import expect
 from utilities.email_generator import generate_unique_email
+from utilities.json_loader import load_json
 
 pytestmark = pytest.mark.regression
 
@@ -10,27 +11,28 @@ pytestmark = pytest.mark.regression
 class TestRegisterUser:
 
     @allure.title("Register new user successfully and delete account")
-    def test_register_user(self, home, existing_user,user_password):
+    def test_register_user(self, home, existing_user, user_password):
+        reg = load_json("account_data")["registration"]
         email = generate_unique_email()
         password = user_password
-        name = existing_user["name"]
-        gender = "Mr"
+        name = reg["name"]
+        gender = reg["gender"]
         date_data = {
-            "day": 10,
-            "month": "January",
-            "year": "2000"
+            "day": int(reg["birth_date"]),
+            "month": reg["birth_month"],
+            "year": reg["birth_year"]
         }
         address_data = {
-            "first": "Ori",
-            "last": "Peles",
-            "company": "global",
-            "addr1": "123 Test Street",
-            "addr2": "Building 4",
-            "country": "Israel",
-            "state": "Center",
-            "city": "Petah Tikva",
-            "zipcode": "4950000",
-            "mobile": "0501234567"
+            "first": reg["first"],
+            "last": reg["last"],
+            "company": reg["company"],
+            "addr1": reg["addr1"],
+            "addr2": reg["addr2"],
+            "country": reg["country"],
+            "state": reg["state"],
+            "city": reg["city"],
+            "zipcode": reg["zipcode"],
+            "mobile": reg["mobile"]
         }
 
         with allure.step("Navigate to signup page"):

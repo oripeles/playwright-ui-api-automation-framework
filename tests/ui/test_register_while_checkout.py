@@ -1,6 +1,7 @@
 import pytest
 import allure
 from playwright.sync_api import expect
+from utilities.json_loader import load_json
 
 pytestmark = pytest.mark.regression
 
@@ -9,7 +10,7 @@ class TestRegisterCheckout:
 
     @allure.title("Redirect to login page when checking out as a guest")
     def test_register_while_checkout_redirects_to_login(self, home):
-        product_name = "Blue Top"
+        product_name = load_json("products_data")["products"]["first"]["name"]
         with allure.step("Add product to cart"):
             product = home.click_product_tab()
             product.add_to_cart_by_name(product_name)

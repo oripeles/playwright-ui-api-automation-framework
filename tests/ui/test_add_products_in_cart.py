@@ -1,6 +1,7 @@
 import pytest
 import allure
 from playwright.sync_api import expect
+from utilities.json_loader import load_json
 
 @allure.feature("Cart")
 class TestAddProductsInCart:
@@ -8,12 +9,13 @@ class TestAddProductsInCart:
     @pytest.mark.smoke
     @allure.title("Add two products to cart and verify price and quantity")
     def test_add_products_in_cart(self, home):
-        expected_first_price = "Rs. 500"
-        expected_second_price = "Rs. 400"
-        expected_first_qty = "1"
-        expected_second_qty = "1"
-        first_product_name = "Blue Top"
-        second_product_name = "Men Tshirt"
+        products = load_json("products_data")["products"]
+        first_product_name = products["first"]["name"]
+        second_product_name = products["second"]["name"]
+        expected_first_price = products["first"]["price"]
+        expected_second_price = products["second"]["price"]
+        expected_first_qty = products["first"]["quantity"]
+        expected_second_qty = products["second"]["quantity"]
         with allure.step("Add products to cart"):
             product = home.click_product_tab()
             product.add_to_cart_by_name(first_product_name)

@@ -1,0 +1,19 @@
+{
+  "registration": {
+    "name": "Test User",
+    "gender": "Mr",
+    "birth_date": "10",
+    "birth_month": "January",
+    "birth_year": "2000",
+    "first": "Test",
+    "last": "User",
+    "company": "global",
+    "addr1": "123 Test Street",
+    "addr2": "Building 4",
+    "country": "Israel",
+    "state": "Center",
+    "city": "Petah Tikva",
+    "zipcode": "4950000",
+    "mobile": "0501234567"
+  }
+}

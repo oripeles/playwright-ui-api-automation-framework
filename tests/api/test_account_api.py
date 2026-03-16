@@ -1,31 +1,33 @@
 import pytest
 import allure
 from utilities.email_generator import generate_unique_email
+from utilities.json_loader import load_json
 
 pytestmark = pytest.mark.regression
 
-def test_create_account_success(auth_client):
+def test_create_account_success(auth_client, user_password):
+    reg = load_json("account_data")["registration"]
     email = generate_unique_email()
-    password = "Password123!"
+    password = user_password
 
     create_payload = {
-        "name": "Ori Peles",
+        "name": reg["name"],
         "email": email,
         "password": password,
-        "title": "Mr",
-        "birth_date": "10",
+        "title": reg["gender"],
+        "birth_date": reg["birth_date"],
         "birth_month": "1",
-        "birth_year": "2000",
-        "firstname": "Ori",
-        "lastname": "Peles",
-        "company": "global",
-        "address1": "123 Test Street",
-        "address2": "Building 4",
-        "country": "Israel",
-        "zipcode": "4950000",
-        "state": "Center",
-        "city": "Petah Tikva",
-        "mobile_number": "0501234567",
+        "birth_year": reg["birth_year"],
+        "firstname": reg["first"],
+        "lastname": reg["last"],
+        "company": reg["company"],
+        "address1": reg["addr1"],
+        "address2": reg["addr2"],
+        "country": reg["country"],
+        "zipcode": reg["zipcode"],
+        "state": reg["state"],
+        "city": reg["city"],
+        "mobile_number": reg["mobile"],
     }
 
     with allure.step("Create account via API"):

@@ -1,0 +1,15 @@
+{
+  "products": {
+    "first": {
+      "name": "Blue Top",
+      "price": "Rs. 500",
+      "quantity": "1"
+    },
+    "second": {
+      "name": "Men Tshirt",
+      "price": "Rs. 400",
+      "quantity": "1"
+    },
+    "search_term": "top"
+  }
+}
