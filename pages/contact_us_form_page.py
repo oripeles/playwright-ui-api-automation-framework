@@ -1,7 +1,9 @@
 from pages.base_page import BasePage
+from playwright.sync_api import Page
+
 
 class ContactUsFormPage(BasePage):
-    def __init__(self, page):
+    def __init__(self, page: Page) -> None:
         super().__init__(page)
 
         self.get_in_touch_title = page.get_by_role("heading", name="Get In Touch")
@@ -13,16 +15,14 @@ class ContactUsFormPage(BasePage):
         self.get_in_touch_success = page.locator(".status.alert.alert-success")
         self.home_button = page.get_by_role("link", name="Home")
 
-    def fill_details(self, name, email, subject, message):
+    def fill_details(self, name: str, email: str, subject: str, message: str) -> None:
         self.name_input.fill(name)
         self.email_input.fill(email)
         self.subject_input.fill(subject)
         self.message_input.fill(message)
 
-    def click_submit(self):
+    def click_submit(self) -> None:
         self.submit_button.click()
 
-    def click_home(self):
+    def click_home(self) -> None:
         self.home_button.click()
-
-

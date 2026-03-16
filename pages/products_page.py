@@ -1,9 +1,12 @@
+from __future__ import annotations
+
 from pages.base_page import BasePage
 from pages.cart_page import CartPage
 from playwright.sync_api import Page, Locator
 
+
 class ProductsPage(BasePage):
-    def __init__(self, page):
+    def __init__(self, page: Page) -> None:
         super().__init__(page)
 
         self.cases_title = page.get_by_role("heading", name="All Products")
@@ -17,33 +20,26 @@ class ProductsPage(BasePage):
         self.view_cart_top = page.get_by_role("link", name="Cart")
         self.product_cards = page.locator(".product-image-wrapper")
 
-
-
-    def click_product_view(self):
+    def click_product_view(self) -> None:
         self.view_product_first_button.click()
 
-    def search_product_fill(self, product):
+    def search_product_fill(self, product: str) -> None:
         self.search_product.fill(product)
 
-    def search_product_click(self):
+    def search_product_click(self) -> None:
         self.search_product_button.click()
 
-    def add_to_cart_by_name(self, name):
+    def add_to_cart_by_name(self, name: str) -> None:
         card = self.product_cards.filter(has_text=name).first
         card.hover()
         card.locator(".overlay-content a.add-to-cart").click()
 
-    def continue_shopping(self):
+    def continue_shopping(self) -> None:
         self.continue_shopping_btn.click()
 
-    def open_cart(self):
+    def open_cart(self) -> CartPage:
         self.view_cart_top.click()
         return CartPage(self.page)
 
-    def get_search_value(self) :
+    def get_search_value(self) -> str:
         return self.search_product.input_value()
-
-
-
-
-

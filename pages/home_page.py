@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from pages.account_deleted_page import AccountDeletedPage
 from pages.base_page import BasePage
 from pages.cart_page import CartPage
@@ -6,10 +8,11 @@ from pages.contact_us_form_page import ContactUsFormPage
 from pages.login_page import LoginPage
 from pages.product_detail_page import ProductsDetailPage
 from pages.products_page import ProductsPage
+from playwright.sync_api import Page
 
 
 class HomePage(BasePage):
-    def __init__(self, page):
+    def __init__(self, page: Page) -> None:
         super().__init__(page)
 
         self.cart_tab= page.get_by_role("link", name="Cart")
@@ -35,70 +38,56 @@ class HomePage(BasePage):
         self.men_shirts_title = page.get_by_role("heading", name="Men - Tshirts Products")
         self.shirts_category = page.get_by_role("link", name="Tshirts")
 
-    def click_login_tab(self):
+    def click_login_tab(self) -> LoginPage:
         self.login_tab.click()
         return LoginPage(self.page)
 
-    def click_logout_tab(self):
+    def click_logout_tab(self) -> LoginPage:
         self.logout_tab.click()
         return LoginPage(self.page)
 
-    def click_contact_us_tab(self):
+    def click_contact_us_tab(self) -> ContactUsFormPage:
         self.contact_us_tab.click()
         return ContactUsFormPage(self.page)
 
-    def click_delete_account(self):
+    def click_delete_account(self) -> AccountDeletedPage:
         self.delete_account_tab.click()
         return AccountDeletedPage(self.page)
 
-    def click_test_cases_tab(self):
+    def click_test_cases_tab(self) -> CasesPage:
         self.test_cases_tab.click()
         return CasesPage(self.page)
 
-    def click_product_tab(self):
+    def click_product_tab(self) -> ProductsPage:
         self.products_tab.click()
         return ProductsPage(self.page)
 
-    def click_view_product(self, index):
+    def click_view_product(self, index: int) -> ProductsDetailPage:
         self.view_product.nth(index).click()
         return ProductsDetailPage(self.page)
 
-    def go_to_cart(self):
+    def go_to_cart(self) -> CartPage:
         self.cart_tab.click()
         return CartPage(self.page)
 
-    def scroll_down(self):
+    def scroll_down(self) -> None:
         self.scroll_to_bottom()
 
-    def subscribe(self, email):
+    def subscribe(self, email: str) -> None:
         self.subscription_input.fill(email)
         self.subscription_button.click()
 
-    def click_women_category(self):
+    def click_women_category(self) -> None:
         self.women_category.click()
 
-    def click_dress_category(self):
+    def click_dress_category(self) -> None:
         self.dress_category.click()
 
-    def click_men_category(self):
+    def click_men_category(self) -> None:
         self.men_category.click()
 
-    def click_shirt_category(self):
+    def click_shirt_category(self) -> None:
         self.shirts_category.click()
 
-    def get_logged_in_as_text(self):
+    def get_logged_in_as_text(self) -> str:
         return self.logged_in_user.inner_text().strip()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
