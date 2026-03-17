@@ -20,7 +20,9 @@ def context(browser, base_url):
         base_url=base_url,
         viewport={"width": 1920, "height": 1080},
     )
+    context.tracing.start(screenshots=True, snapshots=True)
     yield context
+    context.tracing.stop(path="traces/trace.zip")
     context.close()
 
 
