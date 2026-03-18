@@ -112,6 +112,7 @@ jobs:
           retention-days: 7
 
       - name: Generate Allure HTML report
+        if: always()
         run: |
           mkdir -p allure-report
           docker run --rm \
@@ -121,6 +122,7 @@ jobs:
             allure generate allure-results -o allure-report --clean
 
       - name: Upload Pages artifact
+        if: always()
         uses: actions/upload-pages-artifact@v3
         with:
           path: allure-report
