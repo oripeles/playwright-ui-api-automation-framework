@@ -15,14 +15,14 @@ def browser(playwright):
 
 
 @pytest.fixture
-def context(browser, base_url):
+def context(browser, base_url, request):
     context = browser.new_context(
         base_url=base_url,
         viewport={"width": 1920, "height": 1080},
     )
     context.tracing.start(screenshots=True, snapshots=True)
     yield context
-    context.tracing.stop(path="traces/trace.zip")
+    context.tracing.stop(path=f"traces/{request.node.name}.zip")
     context.close()
 
 
