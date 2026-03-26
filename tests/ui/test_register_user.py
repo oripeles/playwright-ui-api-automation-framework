@@ -2,13 +2,13 @@ import pytest
 import allure
 from playwright.sync_api import expect
 from utilities.email_generator import generate_unique_email
+from tests.base_test import BaseTest
 from utilities.json_loader import load_json
 
 pytestmark = pytest.mark.regression
 
 @allure.feature("Registration")
-@pytest.mark.skip(reason="flaky - site is slow on CI")
-class TestRegisterUser:
+class TestRegisterUser(BaseTest):
 
     @allure.title("Register new user successfully and delete account")
     def test_register_user(self, home, existing_user, user_password):
@@ -52,15 +52,17 @@ class TestRegisterUser:
 
         with allure.step("Verify account created"):
             created = info.click_create_account()
-            expect(created.account_created_title).to_be_visible()
+            created.wait_until_stable()
+            expect(created.account_created_title).to_be_visible(timeout=15000)
             created.click_continue()
-            expect(home.logged_in_user).to_be_visible()
+            home.wait_until_stable()
+            expect(home.logged_in_user).to_be_visible(timeout=10000)
             expect(home.logged_in_user).to_have_text(f"Logged in as {name}")
 
         with allure.step("Delete account"):
             delete_account = home.click_delete_account()
+            delete_account.wait_until_stable()
             delete_account.click_continue()
-            expect(home.login_tab).to_be_visible()
+            home.wait_until_stable()
+            expect(home.login_tab).to_be_visible(timeout=10000)
             expect(home.login_tab).to_have_text("Signup / Login")
-
-

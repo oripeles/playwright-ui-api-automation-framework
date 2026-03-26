@@ -1,11 +1,12 @@
 import pytest
 import allure
 from playwright.sync_api import expect
+from tests.base_test import BaseTest
 
 pytestmark = pytest.mark.regression
 
 @allure.feature("Test Cases")
-class TestCasesTest:
+class TestCasesTest(BaseTest):
 
     @allure.title("Verify test cases page is accessible and title is visible")
     def test_cases_test(self, home):

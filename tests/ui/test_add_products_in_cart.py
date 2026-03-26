@@ -1,10 +1,11 @@
 import pytest
 import allure
 from playwright.sync_api import expect
+from tests.base_test import BaseTest
 from utilities.json_loader import load_json
 
 @allure.feature("Cart")
-class TestAddProductsInCart:
+class TestAddProductsInCart(BaseTest):
 
     @pytest.mark.smoke
     @allure.title("Add two products to cart and verify price and quantity")

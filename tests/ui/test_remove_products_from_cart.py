@@ -1,12 +1,13 @@
 import pytest
 import allure
 from playwright.sync_api import expect
+from tests.base_test import BaseTest
 from utilities.json_loader import load_json
 
 pytestmark = pytest.mark.regression
 
 @allure.feature("Cart")
-class TestRemoveProductsFromCart:
+class TestRemoveProductsFromCart(BaseTest):
 
     @allure.title("Remove product from cart successfully")
     def test_remove_products_from_cart(self, home):

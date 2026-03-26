@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 from pages.account_created_page import AccountCreatedPage
-from pages.base_page import BasePage
+from pages.base_page import BasePage, logger
 from playwright.sync_api import Page
 
 
 class AccountInfoPage(BasePage):
+    """Account registration form page."""
+
     def __init__(self, page: Page) -> None:
         super().__init__(page)
 
@@ -31,6 +33,8 @@ class AccountInfoPage(BasePage):
         self.create_account_button = page.locator("[data-qa='create-account']")
 
     def select_title(self, title: str) -> None:
+        """Select Mr or Mrs title radio button."""
+        logger.info("Selecting title: %s", title)
         if title == "Mr":
             self.title_mr.check()
         elif title == "Mrs":
@@ -39,20 +43,28 @@ class AccountInfoPage(BasePage):
             raise ValueError("Title must be 'Mr' or 'Mrs'")
 
     def fill_password(self, password: str) -> None:
+        """Fill in the account password."""
+        logger.info("Filling password")
         self.password_input.fill(password)
 
     def select_date(self, day: int, month: str, year: int) -> None:
+        """Select date of birth from dropdowns."""
+        logger.info("Selecting DOB: %s/%s/%s", day, month, year)
         self.days_select.select_option(str(day))
         self.years_select.select_option(str(year))
         self.months_select.select_option(label=month)
 
     def select_newsletter(self) -> None:
+        """Check the newsletter checkbox."""
         self.newsletter_checkbox.check()
 
     def select_optin(self) -> None:
+        """Check the special offers opt-in checkbox."""
         self.optin_checkbox.check()
 
     def fill_details(self, first: str, last: str, company: str, addr1: str, addr2: str, country: str, state: str, city: str, zipcode: str, mobile: str) -> None:
+        """Fill in all address and personal details."""
+        logger.info("Filling details: %s %s, %s, %s", first, last, city, country)
         self.first_name_input.fill(first)
         self.last_name_input.fill(last)
         self.company_input.fill(company)
@@ -65,5 +77,7 @@ class AccountInfoPage(BasePage):
         self.mobile_input.fill(mobile)
 
     def click_create_account(self) -> AccountCreatedPage:
+        """Click 'Create Account' and return AccountCreatedPage."""
+        logger.info("Clicking Create Account")
         self.create_account_button.click()
         return AccountCreatedPage(self.page)

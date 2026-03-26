@@ -1,11 +1,12 @@
 import pytest
 import allure
 from playwright.sync_api import expect
+from tests.base_test import BaseTest
 
 pytestmark = pytest.mark.regression
 
 @allure.feature("Subscription")
-class TestSubscriptionFromCart:
+class TestSubscriptionFromCart(BaseTest):
 
     @allure.title("Subscribe successfully from cart page")
     def test_subscription_card(self, home, existing_user):

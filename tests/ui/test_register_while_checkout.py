@@ -1,12 +1,13 @@
 import pytest
 import allure
 from playwright.sync_api import expect
+from tests.base_test import BaseTest
 from utilities.json_loader import load_json
 
 pytestmark = pytest.mark.regression
 
 @allure.feature("Checkout")
-class TestRegisterCheckout:
+class TestRegisterCheckout(BaseTest):
 
     @allure.title("Redirect to login page when checking out as a guest")
     def test_register_while_checkout_redirects_to_login(self, home):

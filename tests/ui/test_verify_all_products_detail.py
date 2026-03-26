@@ -1,11 +1,12 @@
 import pytest
 import allure
 from playwright.sync_api import expect
+from tests.base_test import BaseTest
 
 pytestmark = pytest.mark.regression
 
 @allure.feature("Products")
-class TestVerifyAllProductsDetail:
+class TestVerifyAllProductsDetail(BaseTest):
 
     @allure.title("Verify product details page is accessible from all products list")
     def test_verify_all_products_detail(self, home):

@@ -1,11 +1,12 @@
 import pytest
 import allure
 from playwright.sync_api import expect
+from tests.base_test import BaseTest
 
 pytestmark = pytest.mark.regression
 
 @allure.feature("Categories")
-class TestViewCategoryProducts:
+class TestViewCategoryProducts(BaseTest):
 
     @allure.title("View products in Women > Dress category")
     def test_view_women_category_products(self, home):

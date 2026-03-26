@@ -1,8 +1,10 @@
-from pages.base_page import BasePage
+from pages.base_page import BasePage, logger
 from playwright.sync_api import Page
 
 
 class ContactUsFormPage(BasePage):
+    """Contact Us form page."""
+
     def __init__(self, page: Page) -> None:
         super().__init__(page)
 
@@ -16,13 +18,19 @@ class ContactUsFormPage(BasePage):
         self.home_button = page.get_by_role("link", name="Home")
 
     def fill_details(self, name: str, email: str, subject: str, message: str) -> None:
+        """Fill in all contact form fields."""
+        logger.info("Filling contact form: name=%s subject=%s", name, subject)
         self.name_input.fill(name)
         self.email_input.fill(email)
         self.subject_input.fill(subject)
         self.message_input.fill(message)
 
     def click_submit(self) -> None:
+        """Submit the contact form."""
+        logger.info("Submitting contact form")
         self.submit_button.click()
 
     def click_home(self) -> None:
+        """Click 'Home' button to return to homepage."""
+        logger.info("Navigating back to home")
         self.home_button.click()

@@ -1,10 +1,11 @@
 import pytest
 import allure
 from playwright.sync_api import expect
+from tests.base_test import BaseTest
 
 
 @allure.feature("Login")
-class TestLoginApiUi:
+class TestLoginApiUi(BaseTest):
 
     @pytest.mark.integration
     @pytest.mark.smoke

@@ -111,6 +111,19 @@ jobs:
           path: traces
           retention-days: 7
 
+      - name: Download previous Allure history into allure-results
+        if: always()
+        run: |
+          mkdir -p allure-results/history
+          PAGES_URL="https://oripeles.github.io/playwright-ui-api-automation-framework/history"
+          curl -sSL "$PAGES_URL/history.json" -o /dev/null -w "%{http_code}" | grep -q 200 && \
+          curl -sSL -o allure-results/history/history.json "$PAGES_URL/history.json" && \
+          curl -sSL -o allure-results/history/history-trend.json "$PAGES_URL/history-trend.json" && \
+          curl -sSL -o allure-results/history/duration-trend.json "$PAGES_URL/duration-trend.json" && \
+          curl -sSL -o allure-results/history/categories-trend.json "$PAGES_URL/categories-trend.json" && \
+          curl -sSL -o allure-results/history/retry-trend.json "$PAGES_URL/retry-trend.json" || \
+          echo "No previous history found - first run"
+
       - name: Generate Allure HTML report
         if: always()
         run: |

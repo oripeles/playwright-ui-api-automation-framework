@@ -1,11 +1,12 @@
 import pytest
 import allure
 from playwright.sync_api import expect
+from tests.base_test import BaseTest
 
 pytestmark = pytest.mark.regression
 
 @allure.feature("Registration")
-class TestRegisterUserWithExistingEmail:
+class TestRegisterUserWithExistingEmail(BaseTest):
 
     @allure.title("Registration fails when using an existing email")
     def test_register_user_with_existing_email(self, home, existing_user):

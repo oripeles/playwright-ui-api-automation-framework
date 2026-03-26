@@ -1,11 +1,12 @@
 import pytest
 import allure
 from playwright.sync_api import expect
+from tests.base_test import BaseTest
 
 pytestmark = pytest.mark.regression
 
 @allure.feature("Cart")
-class TestVerifyProductQuantityInCart:
+class TestVerifyProductQuantityInCart(BaseTest):
 
     @allure.title("Add product with specific quantity and verify it appears in cart")
     def test_verify_product_quantity_in_cart(self, home):

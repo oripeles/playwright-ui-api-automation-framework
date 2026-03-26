@@ -1,12 +1,13 @@
 import pytest
 import allure
 from playwright.sync_api import expect
+from tests.base_test import BaseTest
 from utilities.json_loader import load_json
 
 pytestmark = pytest.mark.regression
 
 @allure.feature("Search")
-class TestSearchProduct:
+class TestSearchProduct(BaseTest):
 
     @allure.title("Search for product and verify relevant results are displayed")
     def test_search_product(self, home):

@@ -33,11 +33,10 @@ def test_create_account_success(auth_client, user_password):
     with allure.step("Create account via API"):
         create_res = auth_client.create_account(create_payload)
         create_data = create_res.json()
-        assert create_data["responseCode"] == 201
+        assert create_data["responseCode"] == 201, f"Expected responseCode 201, got {create_data['responseCode']}"
 
     with allure.step("Delete account via API"):
         delete_res = auth_client.delete_account(email, password)
         delete_data = delete_res.json()
-        assert delete_data["responseCode"] == 200
-        assert "deleted" in delete_data["message"].lower()
-
+        assert delete_data["responseCode"] == 200, f"Expected responseCode 200, got {delete_data['responseCode']}"
+        assert "deleted" in delete_data["message"].lower(), f"Expected 'deleted' in message, got: {delete_data['message']}"
