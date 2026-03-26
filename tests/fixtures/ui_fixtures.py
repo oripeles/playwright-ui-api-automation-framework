@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import expect
-from utilities.config import HEADLESS
+from utilities.config import HEADLESS, BROWSER
 from utilities.logger import get_logger
 from pages.home_page import HomePage
 
@@ -9,9 +9,9 @@ logger = get_logger("fixtures")
 
 @pytest.fixture(scope="session")
 def browser(playwright):
-    """Launch a Chromium browser for the entire test session."""
-    logger.info("Launching browser (headless=%s)", HEADLESS)
-    browser = playwright.chromium.launch(
+    """Launch a browser for the entire test session."""
+    logger.info("Launching %s browser (headless=%s)", BROWSER, HEADLESS)
+    browser = getattr(playwright, BROWSER).launch(
         headless=HEADLESS,
         args=["--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage"],
     )
