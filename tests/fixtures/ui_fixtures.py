@@ -39,6 +39,9 @@ def context(browser, base_url, request):
 def page(context):
     """Open a new page in the current browser context."""
     page = context.new_page()
+    page.route("**/*googlesyndication*", lambda route: route.abort())
+    page.route("**/*fundingchoicesmessages*", lambda route: route.abort())
+    page.route("**/*adtrafficquality*", lambda route: route.abort())
     yield page
     page.close()
 
