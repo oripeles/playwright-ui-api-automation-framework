@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import expect
-from utilities.config import HEADLESS, BROWSER
+from utilities.config import HEADLESS, BROWSER, DEVICE
 from utilities.logger import get_logger
 from pages.home_page import HomePage
 
@@ -21,13 +21,17 @@ def browser(playwright):
 
 
 @pytest.fixture
-def context(browser, base_url, request):
+def context(browser, base_url, request, playwright):
     """Create a new browser context with tracing enabled."""
-    logger.info("Creating browser context for test: %s", request.node.name)
-    context = browser.new_context(
-        base_url=base_url,
-        viewport={"width": 1920, "height": 1080},
-    )
+    logger.info("Creating browser context for test: %s (device=%s)", request.node.name, DEVICE or "desktop")
+    if DEVICE:
+        device_settings = playwright.devices[DEVICE]
+        context = browser.new_context(**device_settings, base_url=base_url)
+    else:
+        context = browser.new_context(
+            base_url=base_url,
+            viewport={"width": 1920, "height": 1080},
+        )
     context.tracing.start(screenshots=True, snapshots=True)
     yield context
     context.tracing.stop(path=f"traces/{request.node.name}.zip")
