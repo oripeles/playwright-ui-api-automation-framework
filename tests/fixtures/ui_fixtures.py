@@ -42,10 +42,14 @@ def context(browser, base_url, request, playwright):
 @pytest.fixture
 def page(context):
     """Open a new page in the current browser context."""
+    def block_ads(route):
+        if "automationexercise.com" in route.request.url:
+            route.continue_()
+        else:
+            route.abort()
+
     page = context.new_page()
-    page.route("**/*googlesyndication*", lambda route: route.abort())
-    page.route("**/*fundingchoicesmessages*", lambda route: route.abort())
-    page.route("**/*adtrafficquality*", lambda route: route.abort())
+    page.route("**/*", block_ads)
     yield page
     page.close()
 
