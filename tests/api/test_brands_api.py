@@ -1,5 +1,7 @@
 import pytest
+from jsonschema import validate
 from tests.api.helpers.assertions import assert_method_not_supported
+from tests.api.schemas.brand_schema import BRANDS_RESPONSE_SCHEMA, BRAND_SCHEMA
 
 pytestmark = pytest.mark.regression
 
@@ -9,20 +11,13 @@ def test_get_all_brands_contract(brands_client):
     assert res.status == 200, f"Expected HTTP 200, got {res.status}"
 
     data = res.json()
-    assert data["responseCode"] == 200, f"Expected responseCode 200, got {data['responseCode']}"
-    assert isinstance(data.get("brands"), list), "Response missing 'brands' list"
-    assert len(data["brands"]) > 0, "Brands list is empty"
+    validate(instance=data, schema=BRANDS_RESPONSE_SCHEMA)
 
 def test_get_all_brands_schema(brands_client):
-    data = brands_client.get_all_brands().json()
-    brands = data["brands"]
+    brands = brands_client.get_all_brands().json()["brands"]
 
     for b in brands:
-        assert set(b.keys()) == {"id", "brand"}, f"Unexpected keys: {b.keys()}"
-        assert isinstance(b["id"], int), f"Expected int id, got {type(b['id'])}"
-        assert b["id"] > 0, f"Expected positive id, got {b['id']}"
-        assert isinstance(b["brand"], str), f"Expected str brand, got {type(b['brand'])}"
-        assert b["brand"].strip() != "", f"Brand name is empty for id={b['id']}"
+        validate(instance=b, schema=BRAND_SCHEMA)
 
 def test_get_all_brands_ids_unique(brands_client):
     brands = brands_client.get_all_brands().json()["brands"]

@@ -22,6 +22,12 @@ htmlcov/
 allure-results/
 allure-report/
 
+# Environment
+.env
+
+# Playwright CLI
+.playwright-cli/
+
 # Playwright artifacts
 playwright-report/
 test-results/

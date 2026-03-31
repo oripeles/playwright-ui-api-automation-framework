@@ -8,6 +8,7 @@ pytestmark = pytest.mark.regression
 @allure.feature("Login")
 class TestLogoutUser(BaseTest):
 
+    @pytest.mark.smoke
     @allure.title("Logout successfully and return to login page")
     def test_logout_user(self, home, existing_user,user_password):
         password = user_password

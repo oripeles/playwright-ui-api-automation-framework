@@ -7,6 +7,7 @@ from playwright.sync_api import expect
 
 @allure.feature("Login")
 @allure.title("Login fails with invalid credentials")
+@pytest.mark.smoke
 @pytest.mark.parametrize(
     "case",
     load_json("invalid_logins")

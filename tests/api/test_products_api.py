@@ -1,32 +1,24 @@
 import pytest
+from jsonschema import validate
 from tests.api.helpers.assertions import assert_method_not_supported
 from tests.api.helpers.assertions import assert_missing_required_parameter
+from tests.api.schemas.product_schema import PRODUCTS_RESPONSE_SCHEMA, PRODUCT_SCHEMA
 
 pytestmark = pytest.mark.regression
 
+@pytest.mark.smoke
 def test_get_all_products_contract(products_client):
     res = products_client.get_all_products()
     assert res.status == 200, f"Expected HTTP 200, got {res.status}"
 
     data = res.json()
-    assert data["responseCode"] == 200, f"Expected responseCode 200, got {data['responseCode']}"
-    assert "products" in data, "Response missing 'products' key"
-    assert isinstance(data["products"], list), f"Expected list, got {type(data['products'])}"
-    assert len(data["products"]) > 0, "Products list is empty"
+    validate(instance=data, schema=PRODUCTS_RESPONSE_SCHEMA)
 
 def test_get_all_products_schema(products_client):
     products = products_client.get_all_products().json()["products"]
 
     for p in products:
-        assert "id" in p, f"Product missing 'id': {p}"
-        assert "name" in p, f"Product missing 'name': {p}"
-        assert "price" in p, f"Product missing 'price': {p}"
-        assert "brand" in p, f"Product missing 'brand': {p}"
-
-        assert isinstance(p["id"], int), f"Expected int id, got {type(p['id'])}"
-        assert p["id"] > 0, f"Expected positive id, got {p['id']}"
-        assert isinstance(p["name"], str), f"Expected str name, got {type(p['name'])}"
-        assert p["name"].strip() != "", f"Product name is empty for id={p['id']}"
+        validate(instance=p, schema=PRODUCT_SCHEMA)
 
 def test_get_all_products_contains_blue_top(products_client):
     products = products_client.get_all_products().json()["products"]

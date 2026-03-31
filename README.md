@@ -1,5 +1,7 @@
 # Playwright UI + API Automation Framework – Demo E-Commerce Project
 
+![Smoke Tests](https://github.com/oripeles/playwright-ui-api-automation-framework/actions/workflows/tests.yml/badge.svg)
+
 A test automation framework built with **Python**, **Playwright**, and **Pytest**, targeting a demo e-commerce website.
 
 This project demonstrates a clean, scalable automation architecture including:
@@ -10,6 +12,7 @@ This project demonstrates a clean, scalable automation architecture including:
 - **Docker** execution (headless)
 - **CI/CD** with GitHub Actions and **GitHub Pages** publishing of the Allure HTML report
 - A small **integration** layer (API + UI) for cross-layer validation
+- **Visual regression testing** with Playwright screenshot comparison
 
 ---
 
@@ -46,6 +49,12 @@ This project demonstrates a clean, scalable automation architecture including:
 
 ### Integration Tests (API + UI)
 - Example: **Verify login via API** → then **login via UI** using the same user
+
+### Visual Regression Tests
+- Screenshot-based comparison using Playwright's built-in `expect(page).to_have_screenshot()`
+- First run creates baseline images, subsequent runs detect visual differences
+- Supports device emulation (desktop, iPhone, Pixel) via `DEVICE` env var
+- Run with: `pytest -m visual --update-snapshots` (baseline) / `pytest -m visual` (compare)
 
 ### Failure Debugging (Allure Attachments)
 - Automatic screenshot capture on **test failure**

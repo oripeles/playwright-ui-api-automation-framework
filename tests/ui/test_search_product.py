@@ -9,6 +9,7 @@ pytestmark = pytest.mark.regression
 @allure.feature("Search")
 class TestSearchProduct(BaseTest):
 
+    @pytest.mark.smoke
     @allure.title("Search for product and verify relevant results are displayed")
     def test_search_product(self, home):
         product_search = load_json("products_data")["products"]["second"]["name"]
