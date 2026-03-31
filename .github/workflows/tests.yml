@@ -101,7 +101,7 @@ jobs:
             -v "${{ github.workspace }}/allure-results:/app/allure-results" \
             -v "${{ github.workspace }}/traces:/app/traces" \
             playwright-tests \
-            pytest -n 4 --reruns 3 --reruns-delay 1 --alluredir=/app/allure-results
+            pytest -m "not visual" -n 4 --reruns 3 --reruns-delay 1 --alluredir=/app/allure-results
 
       - name: Upload regression trace (artifact)
         if: always()

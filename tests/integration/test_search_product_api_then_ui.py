@@ -27,4 +27,5 @@ class TestSearchProductApiThenUi(BaseTest):
 
         with allure.step("Verify API product appears in UI results"):
             expect(product_page.searched_products_title).to_be_visible()
-            expect(product_page.view_product_result).to_contain_text(api_product_name)
+            matching_product = product_page.view_product_result.filter(has_text=api_product_name)
+            expect(matching_product.first).to_be_visible()
